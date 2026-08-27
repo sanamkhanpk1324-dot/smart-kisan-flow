@@ -14,16 +14,345 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_date: string
+          centre_id: string
+          created_at: string
+          crop: string
+          expected_quantity: number
+          id: string
+          queue_number: number
+          slot_id: string
+          stage: string
+          start_time: string
+          token_code: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          booking_date: string
+          centre_id: string
+          created_at?: string
+          crop: string
+          expected_quantity?: number
+          id?: string
+          queue_number: number
+          slot_id: string
+          stage?: string
+          start_time: string
+          token_code: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          booking_date?: string
+          centre_id?: string
+          created_at?: string
+          crop?: string
+          expected_quantity?: number
+          id?: string
+          queue_number?: number
+          slot_id?: string
+          stage?: string
+          start_time?: string
+          token_code?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_centre_id_fkey"
+            columns: ["centre_id"]
+            isOneToOne: false
+            referencedRelation: "centres"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_slot_id_fkey"
+            columns: ["slot_id"]
+            isOneToOne: false
+            referencedRelation: "slots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      centres: {
+        Row: {
+          address: string
+          avg_minutes_per_farmer: number
+          capacity_per_slot: number
+          code: string
+          district: string
+          id: string
+          name: string
+          now_serving: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string
+          avg_minutes_per_farmer?: number
+          capacity_per_slot?: number
+          code: string
+          district?: string
+          id?: string
+          name: string
+          now_serving?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          avg_minutes_per_farmer?: number
+          capacity_per_slot?: number
+          code?: string
+          district?: string
+          id?: string
+          name?: string
+          now_serving?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          booking_id: string
+          created_at: string
+          id: string
+          paid_at: string | null
+          reference: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          booking_id: string
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          reference?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          booking_id?: string
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          reference?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      procurement_records: {
+        Row: {
+          actual_quantity: number
+          amount: number
+          booking_id: string
+          created_at: string
+          id: string
+          moisture: number | null
+          quality_grade: string
+          rate_per_quintal: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_quantity?: number
+          amount?: number
+          booking_id: string
+          created_at?: string
+          id?: string
+          moisture?: number | null
+          quality_grade?: string
+          rate_per_quintal?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_quantity?: number
+          amount?: number
+          booking_id?: string
+          created_at?: string
+          id?: string
+          moisture?: number | null
+          quality_grade?: string
+          rate_per_quintal?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "procurement_records_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          crop: string
+          district: string
+          farmer_id: string
+          full_name: string
+          id: string
+          land_size: number
+          language: string
+          mobile: string
+          updated_at: string
+          village: string
+        }
+        Insert: {
+          created_at?: string
+          crop?: string
+          district?: string
+          farmer_id?: string
+          full_name?: string
+          id: string
+          land_size?: number
+          language?: string
+          mobile?: string
+          updated_at?: string
+          village?: string
+        }
+        Update: {
+          created_at?: string
+          crop?: string
+          district?: string
+          farmer_id?: string
+          full_name?: string
+          id?: string
+          land_size?: number
+          language?: string
+          mobile?: string
+          updated_at?: string
+          village?: string
+        }
+        Relationships: []
+      }
+      slots: {
+        Row: {
+          booked_count: number
+          capacity: number
+          centre_id: string
+          end_time: string
+          id: string
+          is_open: boolean
+          slot_date: string
+          start_time: string
+        }
+        Insert: {
+          booked_count?: number
+          capacity?: number
+          centre_id: string
+          end_time: string
+          id?: string
+          is_open?: boolean
+          slot_date: string
+          start_time: string
+        }
+        Update: {
+          booked_count?: number
+          capacity?: number
+          centre_id?: string
+          end_time?: string
+          id?: string
+          is_open?: boolean
+          slot_date?: string
+          start_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "slots_centre_id_fkey"
+            columns: ["centre_id"]
+            isOneToOne: false
+            referencedRelation: "centres"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "farmer" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +479,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["farmer", "admin"],
+    },
   },
 } as const
