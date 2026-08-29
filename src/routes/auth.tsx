@@ -50,7 +50,7 @@ function AuthPage() {
   const { mode } = Route.useSearch();
   const [tab, setTab] = useState<"login" | "register">(mode);
   const [busy, setBusy] = useState(false);
-  const [otp, setOtp] = useState<string | null>(null);
+  const [forgotOpen, setForgotOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
