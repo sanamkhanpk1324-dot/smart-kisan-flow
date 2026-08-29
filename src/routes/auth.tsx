@@ -20,6 +20,7 @@ export const Route = createFileRoute("/auth")({
   validateSearch: (search: Record<string, unknown>) => ({
     mode: search["mode"] === "login" ? ("login" as const) : ("register" as const),
   }),
+  // mode always defaults, so links may omit it
   head: () => ({
     meta: [
       { title: "Login or register — KisanQueue" },
