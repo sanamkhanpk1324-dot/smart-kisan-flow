@@ -189,25 +189,16 @@ function AuthPage() {
               <Button type="submit" size="lg" className="w-full" disabled={busy}>
                 {t("login")}
               </Button>
-              <div className="rounded-lg bg-secondary p-3 text-sm text-secondary-foreground">
-                <p className="font-semibold">{lang === "hi" ? "ओटीपी लॉगिन (डेमो मॉड्यूल)" : "OTP login (demo module)"}</p>
-                <p className="mt-1 text-muted-foreground">
-                  {lang === "hi"
-                    ? "हैकथॉन डेमो में ओटीपी स्क्रीन पर दिखता है; असली SMS गेटवे प्लग-इन मॉड्यूल है।"
-                    : "In this prototype the OTP is shown on screen; a real SMS gateway is a plug-in module."}
-                </p>
-                {otp && <p className="token-type mt-2 text-lg font-bold">OTP: {otp}</p>}
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="mt-2"
-                  onClick={() => setOtp(String(Math.floor(100000 + Math.random() * 900000)))}
-                >
-                  {lang === "hi" ? "डेमो ओटीपी भेजें" : "Send demo OTP"}
-                </Button>
-              </div>
+              <button
+                type="button"
+                className="w-full text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                onClick={() => setForgotOpen((v) => !v)}
+              >
+                {lang === "hi" ? "पासवर्ड भूल गए?" : "Forgot password?"}
+              </button>
             </form>
+
+            {forgotOpen && <ForgotPassword onDone={() => setForgotOpen(false)} />}
           </TabsContent>
 
           <TabsContent value="register">
