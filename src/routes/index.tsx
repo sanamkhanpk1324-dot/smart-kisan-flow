@@ -98,7 +98,7 @@ function Landing() {
         <div className="ml-auto flex items-center gap-2">
           <LanguageToggle />
           <Button asChild size="sm">
-            <Link to="/auth">{t("getStarted")}</Link>
+            <Link to="/auth" search={{ mode: "register" }}>{t("getStarted")}</Link>
           </Button>
         </div>
       </header>
@@ -112,7 +112,7 @@ function Landing() {
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">{t("heroSub")}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <Link to="/auth">{t("getStarted")}</Link>
+              <Link to="/auth" search={{ mode: "register" }}>{t("getStarted")}</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link to="/auth" search={{ mode: "login" }}>
