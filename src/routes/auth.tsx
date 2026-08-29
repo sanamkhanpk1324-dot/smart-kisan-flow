@@ -228,7 +228,7 @@ function AuthPage() {
                 </div>
                 <Field label={t("landSize")} name="land_size" type="number" step="0.1" defaultValue="2" required />
               </div>
-              <Field label={t("password")} name="password" type="password" required />
+              <PasswordField label={t("password")} name="password" required />
               <details className="rounded-lg border border-border p-3">
                 <summary className="flex cursor-pointer items-center gap-2 text-sm font-semibold">
                   <ShieldCheck className="size-4" />
