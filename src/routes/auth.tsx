@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Sprout, ShieldCheck } from "lucide-react";
+import { Sprout, ShieldCheck, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { mobileToEmail } from "@/hooks/useAuth";
 import { claimOfficerRole } from "@/lib/officer.functions";
+import { requestPasswordOtp, resetPasswordWithOtp } from "@/lib/reset.functions";
 import { useI18n } from "@/lib/i18n";
 import { LanguageToggle } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
@@ -256,6 +257,128 @@ function Field({
     <div className="space-y-1.5">
       <Label htmlFor={name}>{label}</Label>
       <Input id={name} name={name} className="h-11 text-base" {...rest} />
+    </div>
+  );
+}
+
+function ForgotPassword({ onDone }: { onDone: () => void }) {
+  const { lang } = useI18n();
+  const [step, setStep] = useState<"mobile" | "verify">("mobile");
+  const [mobile, setMobile] = useState("");
+  const [demoCode, setDemoCode] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function sendOtp() {
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+      toast.error(lang === "hi" ? "सही मोबाइल नंबर डालें" : "Enter a valid 10-digit mobile number");
+      return;
+    }
+    setBusy(true);
+    const res = await requestPasswordOtp({ data: { mobile } });
+    setBusy(false);
+    if (!res.ok) {
+      toast.error(res.error);
+      return;
+    }
+    setDemoCode(res.demoCode);
+    setStep("verify");
+    toast.success(lang === "hi" ? `ओटीपी ${mobile} पर भेजा गया` : `OTP sent to ${mobile}`);
+  }
+
+  async function submitReset(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const code = String(form.get("otp") ?? "").trim();
+    const password = String(form.get("new_password") ?? "");
+    const confirm = String(form.get("confirm_password") ?? "");
+    if (password !== confirm) {
+      toast.error(lang === "hi" ? "दोनों पासवर्ड एक जैसे नहीं हैं" : "Passwords do not match");
+      return;
+    }
+    setBusy(true);
+    const res = await resetPasswordWithOtp({ data: { mobile, code, password } });
+    setBusy(false);
+    if (!res.ok) {
+      toast.error(res.error);
+      return;
+    }
+    toast.success(
+      lang === "hi" ? "नया पासवर्ड सेट हो गया, अब लॉगिन करें" : "New password set — please log in",
+    );
+    onDone();
+  }
+
+  return (
+    <div className="surface-card mt-4 space-y-4 p-5">
+      <div className="flex items-center gap-2">
+        <KeyRound className="size-4 text-primary" />
+        <h2 className="font-semibold">{lang === "hi" ? "पासवर्ड रीसेट करें" : "Reset your password"}</h2>
+      </div>
+
+      {step === "mobile" ? (
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            {lang === "hi"
+              ? "अपना पंजीकृत मोबाइल नंबर डालें। हम उस पर 6 अंकों का ओटीपी भेजेंगे।"
+              : "Enter your registered mobile number. We will send a 6-digit OTP to it."}
+          </p>
+          <div className="space-y-1.5">
+            <Label htmlFor="reset_mobile">{lang === "hi" ? "मोबाइल नंबर" : "Mobile number"}</Label>
+            <Input
+              id="reset_mobile"
+              inputMode="numeric"
+              placeholder="9876543210"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              className="h-11 text-base"
+            />
+          </div>
+          <Button type="button" size="lg" className="w-full" disabled={busy} onClick={sendOtp}>
+            {lang === "hi" ? "ओटीपी भेजें" : "Send OTP"}
+          </Button>
+        </div>
+      ) : (
+        <form onSubmit={submitReset} className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            {lang === "hi"
+              ? `ओटीपी ${mobile} पर भेजा गया है। यह 10 मिनट तक मान्य है।`
+              : `OTP sent to ${mobile}. It is valid for 10 minutes.`}
+          </p>
+          {demoCode && (
+            <div className="rounded-lg bg-secondary p-3 text-sm text-secondary-foreground">
+              <p className="font-semibold">
+                {lang === "hi" ? "डेमो मोड: ओटीपी" : "Demo mode: OTP"} <span className="token-type">{demoCode}</span>
+              </p>
+              <p className="mt-1 text-muted-foreground">
+                {lang === "hi"
+                  ? "असली SMS/WhatsApp गेटवे एक प्लग-इन मॉड्यूल है; प्रोटोटाइप में ओटीपी यहाँ दिखता है।"
+                  : "A real SMS/WhatsApp gateway is a plug-in module; in this prototype the OTP is shown here."}
+              </p>
+            </div>
+          )}
+          <Field label={lang === "hi" ? "ओटीपी" : "OTP"} name="otp" inputMode="numeric" maxLength={6} required />
+          <Field
+            label={lang === "hi" ? "नया पासवर्ड" : "New password"}
+            name="new_password"
+            type="password"
+            required
+          />
+          <Field
+            label={lang === "hi" ? "नया पासवर्ड दोबारा" : "Confirm new password"}
+            name="confirm_password"
+            type="password"
+            required
+          />
+          <div className="flex gap-2">
+            <Button type="submit" size="lg" className="flex-1" disabled={busy}>
+              {lang === "hi" ? "पासवर्ड बदलें" : "Set new password"}
+            </Button>
+            <Button type="button" variant="outline" size="lg" disabled={busy} onClick={sendOtp}>
+              {lang === "hi" ? "फिर भेजें" : "Resend"}
+            </Button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }
