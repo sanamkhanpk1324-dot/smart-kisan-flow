@@ -383,16 +383,14 @@ function ForgotPassword({ onDone }: { onDone: () => void }) {
             </div>
           )}
           <Field label={lang === "hi" ? "ओटीपी" : "OTP"} name="otp" inputMode="numeric" maxLength={6} required />
-          <Field
+          <PasswordField
             label={lang === "hi" ? "नया पासवर्ड" : "New password"}
             name="new_password"
-            type="password"
             required
           />
-          <Field
+          <PasswordField
             label={lang === "hi" ? "नया पासवर्ड दोबारा" : "Confirm new password"}
             name="confirm_password"
-            type="password"
             required
           />
           <div className="flex gap-2">
