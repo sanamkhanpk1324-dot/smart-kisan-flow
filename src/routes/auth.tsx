@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Sprout, ShieldCheck, KeyRound } from "lucide-react";
+import { Sprout, ShieldCheck, KeyRound, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -187,7 +187,7 @@ function AuthPage() {
           <TabsContent value="login">
             <form onSubmit={handleLogin} className="surface-card mt-4 space-y-4 p-5">
               <Field label={t("mobile")} name="mobile" inputMode="numeric" placeholder="9876543210" required />
-              <Field label={t("password")} name="password" type="password" required />
+              <PasswordField label={t("password")} name="password" required />
               <Button type="submit" size="lg" className="w-full" disabled={busy}>
                 {t("login")}
               </Button>
@@ -228,7 +228,7 @@ function AuthPage() {
                 </div>
                 <Field label={t("landSize")} name="land_size" type="number" step="0.1" defaultValue="2" required />
               </div>
-              <Field label={t("password")} name="password" type="password" required />
+              <PasswordField label={t("password")} name="password" required />
               <details className="rounded-lg border border-border p-3">
                 <summary className="flex cursor-pointer items-center gap-2 text-sm font-semibold">
                   <ShieldCheck className="size-4" />
@@ -258,6 +258,31 @@ function Field({
     <div className="space-y-1.5">
       <Label htmlFor={name}>{label}</Label>
       <Input id={name} name={name} className="h-11 text-base" {...rest} />
+    </div>
+  );
+}
+
+function PasswordField({
+  label,
+  name,
+  ...rest
+}: { label: string; name: string } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">) {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={name}>{label}</Label>
+      <div className="relative">
+        <Input id={name} name={name} type={show ? "text" : "password"} className="h-11 pr-11 text-base" {...rest} />
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label={show ? "Hide password" : "Show password"}
+          onClick={() => setShow((v) => !v)}
+          className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+        >
+          {show ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+        </button>
+      </div>
     </div>
   );
 }
@@ -358,16 +383,14 @@ function ForgotPassword({ onDone }: { onDone: () => void }) {
             </div>
           )}
           <Field label={lang === "hi" ? "ओटीपी" : "OTP"} name="otp" inputMode="numeric" maxLength={6} required />
-          <Field
+          <PasswordField
             label={lang === "hi" ? "नया पासवर्ड" : "New password"}
             name="new_password"
-            type="password"
             required
           />
-          <Field
+          <PasswordField
             label={lang === "hi" ? "नया पासवर्ड दोबारा" : "Confirm new password"}
             name="confirm_password"
-            type="password"
             required
           />
           <div className="flex gap-2">
