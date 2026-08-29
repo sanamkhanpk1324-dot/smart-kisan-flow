@@ -115,7 +115,7 @@ function Landing() {
               <Link to="/auth" search={{ mode: "register" }}>{t("getStarted")}</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/auth" search={{ mode: "register" }} search={{ mode: "login" }}>
+              <Link to="/auth" search={{ mode: "login" }}>
                 {t("login")}
               </Link>
             </Button>
