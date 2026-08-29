@@ -57,7 +57,7 @@ export function AppShell({ children, isAdmin }: { children: ReactNode; isAdmin?:
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
+    navigate({ to: "/auth", search: { mode: "login" }, replace: true });
   }
 
   const items = isAdmin ? [...navItems, { to: "/admin", key: "admin", icon: Shield } as const] : navItems;
