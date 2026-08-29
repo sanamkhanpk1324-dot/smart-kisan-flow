@@ -143,6 +143,36 @@ export type Database = {
         }
         Relationships: []
       }
+      password_resets: {
+        Row: {
+          attempts: number
+          code: string
+          created_at: string
+          expires_at: string
+          id: string
+          mobile: string
+          used: boolean
+        }
+        Insert: {
+          attempts?: number
+          code: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          mobile: string
+          used?: boolean
+        }
+        Update: {
+          attempts?: number
+          code?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          mobile?: string
+          used?: boolean
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           amount: number
