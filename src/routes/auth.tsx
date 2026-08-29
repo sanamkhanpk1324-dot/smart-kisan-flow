@@ -187,7 +187,7 @@ function AuthPage() {
           <TabsContent value="login">
             <form onSubmit={handleLogin} className="surface-card mt-4 space-y-4 p-5">
               <Field label={t("mobile")} name="mobile" inputMode="numeric" placeholder="9876543210" required />
-              <Field label={t("password")} name="password" type="password" required />
+              <PasswordField label={t("password")} name="password" required />
               <Button type="submit" size="lg" className="w-full" disabled={busy}>
                 {t("login")}
               </Button>
