@@ -262,6 +262,31 @@ function Field({
   );
 }
 
+function PasswordField({
+  label,
+  name,
+  ...rest
+}: { label: string; name: string } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">) {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={name}>{label}</Label>
+      <div className="relative">
+        <Input id={name} name={name} type={show ? "text" : "password"} className="h-11 pr-11 text-base" {...rest} />
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label={show ? "Hide password" : "Show password"}
+          onClick={() => setShow((v) => !v)}
+          className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+        >
+          {show ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function ForgotPassword({ onDone }: { onDone: () => void }) {
   const { lang } = useI18n();
   const [step, setStep] = useState<"mobile" | "verify">("mobile");
