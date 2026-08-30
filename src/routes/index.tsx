@@ -7,13 +7,13 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "KisanQueue — Book slots, get tokens, skip the wait" },
+      { title: "KisanSetu — Book slots, get tokens, skip the wait" },
       {
         name: "description",
         content:
-          "KisanQueue lets farmers book a procurement slot, receive a digital QR token, track live queue position and follow procurement and payment status.",
+          "KisanSetu lets farmers book a procurement slot, receive a digital QR token, track live queue position and follow procurement and payment status.",
       },
-      { property: "og:title", content: "KisanQueue — Book slots, get tokens, skip the wait" },
+      { property: "og:title", content: "KisanSetu — Book slots, get tokens, skip the wait" },
       {
         property: "og:description",
         content:
@@ -165,7 +165,7 @@ function Landing() {
       </section>
 
       <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">
-        KisanQueue — {t("tagline")}
+        KisanSetu — {t("tagline")}
       </footer>
     </div>
   );

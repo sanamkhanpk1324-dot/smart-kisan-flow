@@ -80,13 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "KisanQueue — Smart Procurement & Payment Management" },
+      { title: "KisanSetu — Smart Procurement & Payment Management" },
       {
         name: "description",
         content:
           "Book procurement slots, get a digital token, track your live queue position, procurement stage and payment status.",
       },
-      { property: "og:title", content: "KisanQueue — Smart Procurement & Payment Management" },
+      { property: "og:title", content: "KisanSetu — Smart Procurement & Payment Management" },
       {
         property: "og:description",
         content: "Digital tokens, live queue tracking and payment status for farmers.",

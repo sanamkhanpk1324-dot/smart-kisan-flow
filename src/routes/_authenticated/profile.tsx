@@ -16,9 +16,9 @@ import { stageLabel, timeLabel } from "@/lib/kq";
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
-      { title: "Farmer profile — KisanQueue" },
+      { title: "Farmer profile — KisanSetu" },
       { name: "description", content: "View and update your farmer details, booking history and payment history." },
-      { property: "og:title", content: "Farmer profile — KisanQueue" },
+      { property: "og:title", content: "Farmer profile — KisanSetu" },
       { property: "og:description", content: "Your Farmer ID, village, crop details and full procurement history." },
     ],
   }),

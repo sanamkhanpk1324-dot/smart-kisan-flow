@@ -23,12 +23,12 @@ export const Route = createFileRoute("/auth")({
   // mode always defaults, so links may omit it
   head: () => ({
     meta: [
-      { title: "Login or register — KisanQueue" },
+      { title: "Login or register — KisanSetu" },
       {
         name: "description",
         content: "Farmers register once with Farmer ID and mobile number, then log in to book procurement slots.",
       },
-      { property: "og:title", content: "Login or register — KisanQueue" },
+      { property: "og:title", content: "Login or register — KisanSetu" },
       { property: "og:description", content: "Secure farmer login for procurement slot booking and payment tracking." },
     ],
   }),
@@ -143,7 +143,7 @@ function AuthPage() {
 
     await supabase.from("notifications").insert({
       user_id: data.user.id,
-      title: lang === "hi" ? "किसानक्यू में स्वागत है" : "Welcome to KisanQueue",
+      title: lang === "hi" ? "किसानसेतु में स्वागत है" : "Welcome to KisanSetu",
       message:
         lang === "hi"
           ? "अपना पहला खरीद स्लॉट बुक करें और डिजिटल टोकन पाएँ।"

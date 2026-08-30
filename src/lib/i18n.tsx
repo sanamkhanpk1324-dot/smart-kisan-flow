@@ -5,7 +5,7 @@ export type Lang = "en" | "hi";
 type Dict = Record<string, { en: string; hi: string }>;
 
 const dict: Dict = {
-  appName: { en: "KisanQueue", hi: "किसानक्यू" },
+  appName: { en: "KisanSetu", hi: "किसानसेतु" },
   tagline: {
     en: "Smart Procurement & Payment Management",
     hi: "स्मार्ट खरीद एवं भुगतान प्रबंधन",
@@ -15,8 +15,8 @@ const dict: Dict = {
     hi: "खरीद केंद्र पर घंटों इंतज़ार अब नहीं।",
   },
   heroSub: {
-    en: "KisanQueue tells you when to come, gives you a digital token, shows your live position in the queue, tracks your procurement and tells you when your payment is done.",
-    hi: "किसानक्यू आपको बताता है कब आना है, डिजिटल टोकन देता है, कतार में आपकी लाइव स्थिति दिखाता है, खरीद ट्रैक करता है और भुगतान पूरा होने पर सूचित करता है।",
+    en: "KisanSetu tells you when to come, gives you a digital token, shows your live position in the queue, tracks your procurement and tells you when your payment is done.",
+    hi: "किसानसेतु आपको बताता है कब आना है, डिजिटल टोकन देता है, कतार में आपकी लाइव स्थिति दिखाता है, खरीद ट्रैक करता है और भुगतान पूरा होने पर सूचित करता है।",
   },
   getStarted: { en: "Register / Login", hi: "पंजीकरण / लॉगिन" },
   login: { en: "Login", hi: "लॉगिन" },
