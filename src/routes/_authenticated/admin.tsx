@@ -14,9 +14,9 @@ import { STAGES, stageLabel, timeLabel, todayISO } from "@/lib/kq";
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
-      { title: "Centre console — KisanQueue" },
+      { title: "Centre console — KisanSetu" },
       { name: "description", content: "Procurement centre console: today's bookings, live queue and payment updates." },
-      { property: "og:title", content: "Centre console — KisanQueue" },
+      { property: "og:title", content: "Centre console — KisanSetu" },
       { property: "og:description", content: "Call the next farmer and update weighing, quality and payment stages." },
     ],
   }),

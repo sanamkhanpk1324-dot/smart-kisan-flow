@@ -20,9 +20,9 @@ import { formatMinutes, predictWait, stageLabel, timeLabel, todayISO } from "@/l
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Farmer dashboard — KisanQueue" },
+      { title: "Farmer dashboard — KisanSetu" },
       { name: "description", content: "Your upcoming slot, live queue position, waiting time and payment status." },
-      { property: "og:title", content: "Farmer dashboard — KisanQueue" },
+      { property: "og:title", content: "Farmer dashboard — KisanSetu" },
       { property: "og:description", content: "Track your procurement slot, queue and payments in one place." },
     ],
   }),

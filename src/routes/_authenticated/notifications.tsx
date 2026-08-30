@@ -11,9 +11,9 @@ import { fetchNotifications } from "@/lib/queries";
 export const Route = createFileRoute("/_authenticated/notifications")({
   head: () => ({
     meta: [
-      { title: "Notifications — KisanQueue" },
+      { title: "Notifications — KisanSetu" },
       { name: "description", content: "Slot reminders, queue updates, centre announcements and payment alerts." },
-      { property: "og:title", content: "Notifications — KisanQueue" },
+      { property: "og:title", content: "Notifications — KisanSetu" },
       { property: "og:description", content: "In-app alerts with an SMS/WhatsApp module for low-network villages." },
     ],
   }),

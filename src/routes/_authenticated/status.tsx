@@ -11,12 +11,12 @@ import { timeLabel } from "@/lib/kq";
 export const Route = createFileRoute("/_authenticated/status")({
   head: () => ({
     meta: [
-      { title: "Procurement & payment status — KisanQueue" },
+      { title: "Procurement & payment status — KisanSetu" },
       {
         name: "description",
         content: "Follow every stage from slot booked to payment completed, with quantity, grade and amount.",
       },
-      { property: "og:title", content: "Procurement & payment status — KisanQueue" },
+      { property: "og:title", content: "Procurement & payment status — KisanSetu" },
       { property: "og:description", content: "Weighing, quality result, expected amount and payment date in one view." },
     ],
   }),

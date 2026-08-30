@@ -14,9 +14,9 @@ import { formatMinutes, predictWait, stageLabel, timeLabel, todayISO } from "@/l
 export const Route = createFileRoute("/_authenticated/queue")({
   head: () => ({
     meta: [
-      { title: "Live queue & digital token — KisanQueue" },
+      { title: "Live queue & digital token — KisanSetu" },
       { name: "description", content: "See your token, who is being served now, farmers ahead and estimated wait." },
-      { property: "og:title", content: "Live queue & digital token — KisanQueue" },
+      { property: "og:title", content: "Live queue & digital token — KisanSetu" },
       { property: "og:description", content: "Real-time queue tracking with a QR check-in token." },
     ],
   }),

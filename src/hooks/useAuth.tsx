@@ -15,7 +15,7 @@ export type Profile = {
 };
 
 export function mobileToEmail(mobile: string) {
-  return `${mobile.replace(/\D/g, "")}@kisanqueue.app`;
+  return `${mobile.replace(/\D/g, "")}@kisansetu.app`;
 }
 
 export function useAuth() {

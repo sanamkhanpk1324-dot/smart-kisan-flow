@@ -17,9 +17,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/book")({
   head: () => ({
     meta: [
-      { title: "Book a procurement slot — KisanQueue" },
+      { title: "Book a procurement slot — KisanSetu" },
       { name: "description", content: "Pick a centre, crop, quantity and time slot, then get a digital QR token." },
-      { property: "og:title", content: "Book a procurement slot — KisanQueue" },
+      { property: "og:title", content: "Book a procurement slot — KisanSetu" },
       { property: "og:description", content: "Smart slot recommendation shows the least crowded time to arrive." },
     ],
   }),
