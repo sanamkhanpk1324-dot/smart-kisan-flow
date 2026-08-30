@@ -25,6 +25,8 @@ export const requestPasswordOtp = createServerFn({ method: "POST" })
       .from("profiles")
       .select("id")
       .eq("mobile", data.mobile)
+      .order("created_at", { ascending: false })
+      .limit(1)
       .maybeSingle();
 
     if (!profile) {
@@ -85,6 +87,8 @@ export const resetPasswordWithOtp = createServerFn({ method: "POST" })
       .from("profiles")
       .select("id")
       .eq("mobile", data.mobile)
+      .order("created_at", { ascending: false })
+      .limit(1)
       .maybeSingle();
     if (!profile) return { ok: false as const, error: "No account is registered with this mobile number" };
 
